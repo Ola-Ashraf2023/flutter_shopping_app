@@ -1,7 +1,11 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/core/utils/observer.dart';
+import 'package:shopping_app/features/signup/presentation/pages/signup_screen.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -16,8 +20,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
+        initialRoute: "/",
         title: 'Shopping App',
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: SignUpScreen(),
       ),
     );
   }
