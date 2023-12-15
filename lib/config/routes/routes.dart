@@ -14,9 +14,9 @@ class Routes {
   static Route onGenerate(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.login:
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
+        return MaterialPageRoute(builder: (context) => LoginScreen());
       case AppRoutes.signUp:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+        return MaterialPageRoute(builder: (context) => SignUpScreen());
       case AppRoutes.home:
         return MaterialPageRoute(builder: (context) => HomeScreen());
       default:
