@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shopping_app/core/api/api_manager.dart';
-import 'package:shopping_app/features/signup/data/data_sources/remote/remote_ds.dart';
+import 'package:shopping_app/features/signup/data/data_sources/remote/signup_remote_ds.dart';
 import 'package:shopping_app/features/signup/data/models/request_data.dart';
 import 'package:shopping_app/features/signup/data/repositories/signup_repo_impl.dart';
 import 'package:shopping_app/features/signup/domain/entities/UserEntity.dart';
 import 'package:shopping_app/features/signup/domain/repositories/signup_repo.dart';
 import 'package:shopping_app/features/signup/domain/use_cases/signup_usecase.dart';
 
-import '../../data/data_sources/remote/remote_ds_impl.dart';
+import '../../data/data_sources/remote/signup_remote_ds_impl.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
@@ -22,7 +22,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpEvent>((event, emit) async {
       if (event is RegisterEvent) {
         emit(state.copyWith(screenStatus: ScreenStatus.Loading));
-        RemoteDataSource remoteDataSource = RemoteDataSourceImpl(apiManager);
+        SignUpRemoteDataSource remoteDataSource =
+            SignUpRemoteDataSourceImpl(apiManager);
         SignUpRepo signUpRepo = SignUpRepoImpl(remoteDataSource);
         SignUpUseCase signUpUseCase = SignUpUseCase(signUpRepo);
 
@@ -40,7 +41,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           print("state chamged to success");
         } catch (e) {
           print(e.toString());
-          print("cryyyyyiiiingggg");
           emit(state.copyWith(screenStatus: ScreenStatus.Failure));
         }
       }

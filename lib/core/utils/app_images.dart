@@ -1,3 +1,6 @@
 const String baseImage = "assets/images/";
 
-class AppImages {}
+class AppImages {
+  static const splashImage = "splash.png";
+  static const logoImage = "logo.svg";
+}

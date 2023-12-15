@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:shopping_app/core/api/endpoints.dart';
-import 'package:shopping_app/features/signup/data/data_sources/remote/remote_ds.dart';
+import 'package:shopping_app/features/signup/data/data_sources/remote/signup_remote_ds.dart';
 import 'package:shopping_app/features/signup/data/models/UserModel.dart';
 import 'package:shopping_app/features/signup/data/models/request_data.dart';
 
 import '../../../../../core/api/api_manager.dart';
 
-class RemoteDataSourceImpl implements RemoteDataSource {
+class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
   ApiManager apiManager;
 
-  RemoteDataSourceImpl(this.apiManager);
+  SignUpRemoteDataSourceImpl(this.apiManager);
 
   @override
   Future<UserModel> signUp(RequestData requestData) async {
