@@ -3,6 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopping_app/core/utils/app_colors.dart';
 import 'package:shopping_app/core/utils/app_images.dart';
+import 'package:shopping_app/core/utils/app_strings.dart';
+import 'package:shopping_app/features/home/presentation/tabs/account_tab.dart';
+import 'package:shopping_app/features/home/presentation/tabs/categories_tab.dart';
+import 'package:shopping_app/features/home/presentation/tabs/home_tab.dart';
+
+import '../tabs/fav_tab.dart';
 
 class HomeScreen extends StatelessWidget {
   int homeIdx = 0;
@@ -47,6 +53,39 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: AppColors.mainColor),
         ],
       ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0).w,
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: AppStrings.searchHint,
+                      prefixIcon: Icon(
+                        Icons.search,
+                      ),
+                      prefixIconColor: AppColors.mainColor,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.mainColor),
+                          borderRadius: BorderRadius.circular(35).w)),
+                ),
+              )),
+              Padding(
+                padding: const EdgeInsets.all(8.0).w,
+                child: Icon(
+                  Icons.shopping_cart,
+                  color: AppColors.mainColor,
+                ),
+              )
+            ],
+          ),
+          Expanded(child: tabs[homeIdx])
+        ],
+      ),
     );
   }
 }
+
+List<Widget> tabs = [HomeTab(), CategoriesTab(), FavTab(), AccountTab()];
