@@ -11,7 +11,7 @@ import 'package:shopping_app/features/home/presentation/tabs/home_tab.dart';
 import '../tabs/fav_tab.dart';
 
 class HomeScreen extends StatelessWidget {
-  int homeIdx = 0;
+  int homeIdx = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -55,31 +55,34 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0).w,
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: AppStrings.searchHint,
-                      prefixIcon: Icon(
-                        Icons.search,
-                      ),
-                      prefixIconColor: AppColors.mainColor,
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.mainColor),
-                          borderRadius: BorderRadius.circular(35).w)),
-                ),
-              )),
-              Padding(
-                padding: const EdgeInsets.all(8.0).w,
-                child: Icon(
-                  Icons.shopping_cart,
-                  color: AppColors.mainColor,
-                ),
-              )
-            ],
+          Visibility(
+            visible: homeIdx != 3,
+            child: Row(
+              children: [
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0).w,
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: AppStrings.searchHint,
+                        prefixIcon: Icon(
+                          Icons.search,
+                        ),
+                        prefixIconColor: AppColors.mainColor,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.mainColor),
+                            borderRadius: BorderRadius.circular(35).w)),
+                  ),
+                )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0).w,
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: AppColors.mainColor,
+                  ),
+                )
+              ],
+            ),
           ),
           Expanded(child: tabs[homeIdx])
         ],

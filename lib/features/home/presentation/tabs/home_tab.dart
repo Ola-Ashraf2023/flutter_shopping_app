@@ -105,7 +105,7 @@ class HomeTab extends StatelessWidget {
                           height: 122.h,
                           width: 158.h,
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10).r,
                               child: Image(
                                   image: NetworkImage(
                                       "https://hips.hearstapps.com/hmg-prod/images/cat-captions-for-instagram-6595a058e956b.jpeg?crop=0.588xw:1.00xh;0.207xw,0&resize=100:*")))),
