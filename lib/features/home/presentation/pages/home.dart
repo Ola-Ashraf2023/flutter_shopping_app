@@ -11,7 +11,7 @@ import 'package:shopping_app/features/home/presentation/tabs/home_tab.dart';
 import '../tabs/fav_tab.dart';
 
 class HomeScreen extends StatelessWidget {
-  int homeIdx = 3;
+  int homeIdx = 1;
 
   @override
   Widget build(BuildContext context) {
