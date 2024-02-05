@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shopping_app/core/utils/app_colors.dart';
 import 'package:shopping_app/core/utils/app_images.dart';
 import 'package:shopping_app/core/utils/app_strings.dart';
+import 'package:shopping_app/features/home/presentation/pages/product_details.dart';
 import 'package:shopping_app/features/home/presentation/tabs/account_tab.dart';
 import 'package:shopping_app/features/home/presentation/tabs/categories_tab.dart';
 import 'package:shopping_app/features/home/presentation/tabs/home_tab.dart';
@@ -11,11 +12,13 @@ import 'package:shopping_app/features/home/presentation/tabs/home_tab.dart';
 import '../tabs/fav_tab.dart';
 
 class HomeScreen extends StatelessWidget {
-  int homeIdx = 1;
+  int homeIdx = 2;
+  bool selectedProduct = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return selectedProduct == false
+        ? Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -61,19 +64,22 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                     child: Padding(
-                  padding: const EdgeInsets.all(8.0).w,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: AppStrings.searchHint,
-                        prefixIcon: Icon(
-                          Icons.search,
-                        ),
-                        prefixIconColor: AppColors.mainColor,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.mainColor),
-                            borderRadius: BorderRadius.circular(35).w)),
-                  ),
-                )),
+                      padding: const EdgeInsets.all(8.0).w,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: AppStrings.searchHint,
+                            prefixIcon: Icon(
+                              Icons.search,
+                            ),
+                            prefixIconColor: AppColors.mainColor,
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: AppColors.mainColor),
+                                borderRadius: BorderRadius
+                                    .circular(35)
+                                    .w)),
+                      ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(8.0).w,
                   child: Icon(
@@ -87,6 +93,19 @@ class HomeScreen extends StatelessWidget {
           Expanded(child: tabs[homeIdx])
         ],
       ),
+    )
+        : ProductDetails(
+      title: "White Cat",
+      rating: 5,
+      price: 200,
+      amountSold: 2,
+      description: "Best Friend Ever",
+      ratingQuantity: 10,
+      imageList: [
+        "https://upload.wikimedia.org/wikipedia/commons/0/01/Cat-1044750.jpg",
+        "https://hips.hearstapps.com/hmg-prod/images/beautiful-smooth-haired-red-cat-lies-on-the-sofa-royalty-free-image-1678488026.jpg",
+        "https://wallpapers.com/images/featured/cat-g9rdx9uk2425fip2.jpg",
+      ],
     );
   }
 }
