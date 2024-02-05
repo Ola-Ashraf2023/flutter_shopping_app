@@ -22,6 +22,5 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
       print(e.toString());
       throw Exception();
     }
-    ;
   }
 }

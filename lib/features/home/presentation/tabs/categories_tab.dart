@@ -6,18 +6,18 @@ import 'package:shopping_app/features/home/presentation/widgets/product_card.dar
 class CategoriesTab extends StatelessWidget {
   @override
   int selectedIdx = 1;
-  int categorySelect = 1;
+  int categorySelect = 0;
 
   Widget build(BuildContext context) {
     return categorySelect == 0
         ? Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Column(
             children: [
               Expanded(
-                child: Container(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
                   margin: EdgeInsets.only(top: 10.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.r),

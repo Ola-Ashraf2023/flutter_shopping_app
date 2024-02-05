@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/config/themes/themes.dart';
 import 'package:shopping_app/core/utils/observer.dart';
-import 'package:shopping_app/features/cart/presentation/pages/cart_screen.dart';
 import 'package:shopping_app/features/home/presentation/pages/home.dart';
 
 void main() {
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
         title: 'Shopping App',
-        home: CartScreen(),
+        home: HomeScreen(),
       ),
     );
   }
