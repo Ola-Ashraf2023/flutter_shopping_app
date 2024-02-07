@@ -1,4 +1,4 @@
-import '../entities/CategoryEntity.dart';
+import '../entities/Category_and_brand_entity.dart';
 import '../repositories/home_repo.dart';
 
 class GetCategoriesUseCase {
@@ -6,5 +6,5 @@ class GetCategoriesUseCase {
 
   GetCategoriesUseCase(this.getCategoriesRepo);
 
-  Future<CategoryEntity> call() => getCategoriesRepo.getCategories();
+  Future<CategoryBrandEntity> call() => getCategoriesRepo.getCategories();
 }

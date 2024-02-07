@@ -1,5 +1,7 @@
-import '../../models/category_model.dart';
+import '../../models/category_brand_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<CategoryModel> sendCategoryRequest();
+  Future<CategoryBrandModel> sendCategoryRequest();
+
+  Future<CategoryBrandModel> sendBrandRequest();
 }

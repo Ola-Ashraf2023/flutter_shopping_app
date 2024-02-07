@@ -24,28 +24,30 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeBloc(
             (ApiManager()),
-          )..add(GetCategoryEvent()),
+          )
+            ..add(GetCategoryEvent())
+            ..add(GetBrandEvent()),
         ),
       ],
       child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
         if (state.screenStatus == ScreenStatus.loading) {
           showDialog(
               context: context,
-              builder: (context) => AlertDialog(
+              builder: (context) => const AlertDialog(
                     title: Center(child: CircularProgressIndicator()),
                   ));
         } else if (state.screenStatus == ScreenStatus.failure) {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => AlertDialog(
+              builder: (context) => const AlertDialog(
                     title: Center(child: Text("An Error Occurred")),
                   ));
         } else if (state.screenStatus == ScreenStatus.success) {
           Navigator.pop(context);
           showDialog(
               context: context,
-              builder: (context) => AlertDialog(
+              builder: (context) => const AlertDialog(
                     title: Center(child: Text("Success")),
                   ));
         }
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   elevation: 0,
                   leadingWidth: 100.w,
                   leading: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20.r),
                     child: SvgPicture.asset(baseImage + AppImages.logoImage),
                   ),
                 ),
@@ -70,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                   onTap: (value) {
                     HomeBloc.get(context).add(ChangeNavbarEvent(value));
                   },
-                  items: [
+                  items: const [
                     BottomNavigationBarItem(
                         icon: Icon(Icons.home_rounded),
                         label: "",
@@ -101,12 +103,12 @@ class HomeScreen extends StatelessWidget {
                             child: TextField(
                               decoration: InputDecoration(
                                   hintText: AppStrings.searchHint,
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.search,
                                   ),
                                   prefixIconColor: AppColors.mainColor,
                                   enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: AppColors.mainColor),
                                       borderRadius:
                                           BorderRadius.circular(35).w)),
@@ -114,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                           )),
                           Padding(
                             padding: const EdgeInsets.all(8.0).w,
-                            child: Icon(
+                            child: const Icon(
                               Icons.shopping_cart,
                               color: AppColors.mainColor,
                             ),
@@ -133,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                 amountSold: 2,
                 description: "Best Friend Ever",
                 ratingQuantity: 10,
-                imageList: [
+          imageList: const [
                   "https://upload.wikimedia.org/wikipedia/commons/0/01/Cat-1044750.jpg",
                   "https://hips.hearstapps.com/hmg-prod/images/beautiful-smooth-haired-red-cat-lies-on-the-sofa-royalty-free-image-1678488026.jpg",
                   "https://wallpapers.com/images/featured/cat-g9rdx9uk2425fip2.jpg",

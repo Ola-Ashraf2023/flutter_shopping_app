@@ -1,6 +1,6 @@
 import 'package:shopping_app/features/home/domain/repositories/home_repo.dart';
 
-import '../../domain/entities/CategoryEntity.dart';
+import '../../domain/entities/Category_and_brand_entity.dart';
 import '../data_sources/remote/home_remote_ds.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -8,6 +8,11 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl(this.categoriesRemoteDataSource);
 
-  Future<CategoryEntity> getCategories() =>
+  @override
+  Future<CategoryBrandEntity> getCategories() =>
       categoriesRemoteDataSource.sendCategoryRequest();
+
+  @override
+  Future<CategoryBrandEntity> getBrands() =>
+      categoriesRemoteDataSource.sendBrandRequest();
 }

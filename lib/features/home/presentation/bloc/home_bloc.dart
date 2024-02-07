@@ -7,7 +7,8 @@ import 'package:shopping_app/features/home/domain/repositories/home_repo.dart';
 import 'package:shopping_app/features/home/domain/use_cases/get_categories_use_case.dart';
 
 import '../../../../core/api/api_manager.dart';
-import '../../domain/entities/CategoryEntity.dart';
+import '../../domain/entities/Category_and_brand_entity.dart';
+import '../../domain/use_cases/get_brands_use_case.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -31,6 +32,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           var res = await getCategoriesUseCase.call();
           emit(state.copyWith(
               screenStatus: ScreenStatus.success, categories: res.data));
+        } catch (e) {
+          print(e.toString());
+          emit(state.copyWith(screenStatus: ScreenStatus.failure));
+        }
+      } else if (event is GetBrandEvent) {
+        emit(state.copyWith(screenStatus: ScreenStatus.loading));
+        HomeRemoteDataSource homeRemoteDataSource =
+            HomeRemoteDataSourceImpl(apiManager);
+        HomeRepo homeRepo = HomeRepoImpl(homeRemoteDataSource);
+        GetBrandsUseCase getBrandsUseCase = GetBrandsUseCase(homeRepo);
+        try {
+          var res = await getBrandsUseCase.call();
+          emit(state.copyWith(
+              screenStatus: ScreenStatus.success, brands: res.data));
         } catch (e) {
           print(e.toString());
           emit(state.copyWith(screenStatus: ScreenStatus.failure));

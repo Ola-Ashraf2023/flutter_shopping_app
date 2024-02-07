@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,8 @@ class HomeTab extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Center(child: Text("An Error Occurred")),
-                  ));
+                title: Center(child: Text("An Error Occurred")),
+              ));
         }
       },
       builder: (context, state) {
@@ -79,11 +80,13 @@ class HomeTab extends StatelessWidget {
                             child: Container(
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image(
-                                      image: NetworkImage(state
-                                              .categories?[index].image ??
-                                          "https://via.placeholder.com/398x200"),
-                                      fit: BoxFit.fill,
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          state.categories?[index].image ?? "",
+                                      placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator()),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
                                     ))),
                           ),
                           Expanded(
@@ -103,40 +106,47 @@ class HomeTab extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0).w,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Home Appliances",
+                    Text("Brands",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.mainColor,
                             fontWeight: FontWeight.w500)),
+                    Text(
+                      "View all",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: AppColors.mainColor),
+                    ),
                   ],
                 ),
               ),
               Container(
-                  height: 211.h,
+                  height: 200.h,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1),
-                    itemCount: 8,
+                        crossAxisCount: 2),
+                    itemCount: 12,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          Container(
-                              height: 122.h,
-                              width: 158.h,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10).r,
-                                  child: Image(
-                                      image: NetworkImage(
-                                          "https://hips.hearstapps.com/hmg-prod/images/cat-captions-for-instagram-6595a058e956b.jpeg?crop=0.588xw:1.00xh;0.207xw,0&resize=100:*")))),
-                          Text(
-                            "Cat Pictures",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: AppColors.mainColor),
-                          )
+                          Expanded(
+                              child: Container(
+                                  padding: EdgeInsets.all(10).r,
+                                  height: 122.h,
+                                  width: 158.h,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10).r,
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            state.brands?[index].image ?? "",
+                                        placeholder: (context, url) => Center(
+                                            child: CircularProgressIndicator()),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
+                                      )))),
                         ],
                       );
                     },

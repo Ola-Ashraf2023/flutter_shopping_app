@@ -1,5 +1,7 @@
-import '../entities/CategoryEntity.dart';
+import '../entities/Category_and_brand_entity.dart';
 
 abstract class HomeRepo {
-  Future<CategoryEntity> getCategories();
+  Future<CategoryBrandEntity> getCategories();
+
+  Future<CategoryBrandEntity> getBrands();
 }

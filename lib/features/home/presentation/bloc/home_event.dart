@@ -5,6 +5,8 @@ abstract class HomeEvent {}
 
 class GetCategoryEvent extends HomeEvent {}
 
+class GetBrandEvent extends HomeEvent {}
+
 class ChangeNavbarEvent extends HomeEvent {
   int index;
 
