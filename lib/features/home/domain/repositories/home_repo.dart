@@ -4,4 +4,6 @@ abstract class HomeRepo {
   Future<CategoryBrandEntity> getCategories();
 
   Future<CategoryBrandEntity> getBrands();
+
+  Future<CategoryBrandEntity> getSubcategories(String? id);
 }

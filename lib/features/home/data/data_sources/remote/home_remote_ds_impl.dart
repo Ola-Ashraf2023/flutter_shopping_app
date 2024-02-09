@@ -37,4 +37,18 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       throw Exception();
     }
   }
+
+  @override
+  Future<CategoryBrandModel> sendSubcategoryRequest(String? id) async {
+    try {
+      Response response = await apiManager.getData(
+          endPoint: "${Endpoints.category}/$id/subcategories", data: {});
+      CategoryBrandModel categoryModel =
+          CategoryBrandModel.fromJson(response.data);
+      return categoryModel;
+    } catch (e) {
+      print(e.toString());
+      throw Exception();
+    }
+  }
 }

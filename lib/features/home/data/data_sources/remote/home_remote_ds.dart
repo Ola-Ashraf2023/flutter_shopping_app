@@ -4,4 +4,6 @@ abstract class HomeRemoteDataSource {
   Future<CategoryBrandModel> sendCategoryRequest();
 
   Future<CategoryBrandModel> sendBrandRequest();
+
+  Future<CategoryBrandModel> sendSubcategoryRequest(String? id);
 }

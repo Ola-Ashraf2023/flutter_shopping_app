@@ -12,3 +12,22 @@ class ChangeNavbarEvent extends HomeEvent {
 
   ChangeNavbarEvent(this.index);
 }
+
+class ChangeCategoryEvent extends HomeEvent {
+  int catIndex;
+  String? id;
+
+  ChangeCategoryEvent(this.catIndex, this.id);
+}
+
+class SelectCategoryEvent extends HomeEvent {
+  bool selected;
+
+  SelectCategoryEvent(this.selected);
+}
+
+class SelectProductEvent extends HomeEvent {
+  bool selectedProduct;
+
+  SelectProductEvent(this.selectedProduct);
+}

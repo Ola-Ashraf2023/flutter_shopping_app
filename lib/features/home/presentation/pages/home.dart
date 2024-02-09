@@ -31,11 +31,6 @@ class HomeScreen extends StatelessWidget {
       ],
       child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
         if (state.screenStatus == ScreenStatus.loading) {
-          showDialog(
-              context: context,
-              builder: (context) => const AlertDialog(
-                    title: Center(child: CircularProgressIndicator()),
-                  ));
         } else if (state.screenStatus == ScreenStatus.failure) {
           Navigator.pop(context);
           showDialog(
@@ -43,16 +38,9 @@ class HomeScreen extends StatelessWidget {
               builder: (context) => const AlertDialog(
                     title: Center(child: Text("An Error Occurred")),
                   ));
-        } else if (state.screenStatus == ScreenStatus.success) {
-          Navigator.pop(context);
-          showDialog(
-              context: context,
-              builder: (context) => const AlertDialog(
-                    title: Center(child: Text("Success")),
-                  ));
-        }
+        } else if (state.screenStatus == ScreenStatus.success) {}
       }, builder: (context, state) {
-        return selectedProduct == false
+        return HomeBloc.get(context).selectedProduct == false
             ? Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.white,
