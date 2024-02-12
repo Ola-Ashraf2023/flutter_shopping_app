@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shopping_app/core/api/api_manager.dart';
 import 'package:shopping_app/core/api/endpoints.dart';
 import 'package:shopping_app/features/home/data/data_sources/remote/home_remote_ds.dart';
+import 'package:shopping_app/features/home/data/models/ProductModel.dart';
 
 import '../../models/category_brand_model.dart';
 
@@ -46,6 +47,21 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       CategoryBrandModel categoryModel =
           CategoryBrandModel.fromJson(response.data);
       return categoryModel;
+    } catch (e) {
+      print(e.toString());
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<ProductModel> sendProductRequest(String? cat, String? subcat) async {
+    try {
+      Response response = await apiManager.getData(
+          endPoint:
+              "${Endpoints.product}?category[in]=${cat}&subcategory[in]=${subcat}",
+          data: {});
+      ProductModel productModel = ProductModel.fromJson(response.data);
+      return productModel;
     } catch (e) {
       print(e.toString());
       throw Exception();

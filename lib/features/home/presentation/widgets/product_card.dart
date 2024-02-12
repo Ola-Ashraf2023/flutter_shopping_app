@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,19 +6,23 @@ import '../../../../core/utils/app_colors.dart';
 
 class ProductCard extends StatelessWidget {
   String pname;
-  int price;
+  num price;
   String imageLink;
-  double rating;
+  num rating;
 
   ProductCard(
-      {required this.pname, required this.price, required this.imageLink, required this.rating});
+      {required this.pname,
+      required this.price,
+      required this.imageLink,
+      required this.rating});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(5.r),
       padding: EdgeInsets.all(5.r),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.r),
           border: Border.all(color: Color(0x4d004182))),
       child: Column(
         children: [
@@ -26,7 +31,14 @@ class ProductCard extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
-                  child: Image.network(imageLink, fit: BoxFit.fill),
+                  child: CachedNetworkImage(
+                    height: 128.h,
+                    width: 237.w,
+                    imageUrl: imageLink,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
             ],

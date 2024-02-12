@@ -32,7 +32,6 @@ class HomeScreen extends StatelessWidget {
       child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
         if (state.screenStatus == ScreenStatus.loading) {
         } else if (state.screenStatus == ScreenStatus.failure) {
-          Navigator.pop(context);
           showDialog(
               context: context,
               builder: (context) => const AlertDialog(

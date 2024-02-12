@@ -105,33 +105,50 @@ class CategoriesTab extends StatelessWidget {
                                       crossAxisCount: 2),
                               itemCount: state.subcategories?.length,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.r),
-                                      color: AppColors.mainColor),
-                                  padding: EdgeInsets.all(10.r),
-                                  margin: EdgeInsets.all(3.r),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Center(
-                                          child: Text(
-                                              state.subcategories?[index]
-                                                      .name ??
-                                                  "",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium
-                                                  ?.copyWith(
-                                                    color: Colors.white,
-                                                  )),
+                                return InkWell(
+                                  onTap: () {
+                                    HomeBloc.get(context).add(
+                                        SelectSubcategoryEvent(
+                                            true,
+                                            state
+                                                    .categories?[
+                                                        HomeBloc.get(context)
+                                                            .catIdx]
+                                                    .id ??
+                                                "",
+                                            state.subcategories?[index].id ??
+                                                ""));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(15.r),
+                                        color: AppColors.mainColor),
+                                    padding: EdgeInsets.all(10.r),
+                                    margin: EdgeInsets.all(3.r),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Center(
+                                            child: Text(
+                                                state.subcategories?[index]
+                                                        .name ??
+                                                    "",
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.copyWith(
+                                                      color: Colors.white,
+                                                    )),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
@@ -145,16 +162,15 @@ class CategoriesTab extends StatelessWidget {
                 children: [
                   Expanded(
                       child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
-                    itemCount: 12,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: (191.w / 237.h), crossAxisCount: 2),
+                    itemCount: state.products?.length,
                     itemBuilder: (context, index) {
                       return ProductCard(
-                          pname: "Product Name",
-                          price: 200,
-                          imageLink:
-                              "https://cdn-thumbs.ohmyprints.net/1/1caa356fb6ee107087da8e057c04e550/817x600/thumbnail/fit.jpg",
-                          rating: 3.5);
+                          pname: state.products?[index].title ?? "Error",
+                          price: state.products?[index].price ?? 0,
+                          imageLink: state.products?[index].images?[0] ?? "",
+                          rating: state.products?[index].ratingsAverage ?? 0);
                     },
                   ))
                 ],

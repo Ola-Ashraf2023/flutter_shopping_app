@@ -7,7 +7,7 @@ enum ScreenStatus {
   failure,
   changeTab,
   changeCategory,
-  selectCategory,
+  selectSubcategory,
   selectProduct
 }
 
@@ -17,20 +17,27 @@ class HomeState {
   List<CategoryBrandDataEntity>? categories;
   List<CategoryBrandDataEntity>? brands;
   List<CategoryBrandDataEntity>? subcategories;
+  List<ProductDataEntity>? products;
 
   HomeState(
-      {this.screenStatus, this.categories, this.brands, this.subcategories});
+      {this.screenStatus,
+      this.categories,
+      this.brands,
+      this.subcategories,
+      this.products});
 
   HomeState copyWith(
       {ScreenStatus? screenStatus,
       List<CategoryBrandDataEntity>? categories,
       List<CategoryBrandDataEntity>? brands,
-      List<CategoryBrandDataEntity>? subcategories}) {
+      List<CategoryBrandDataEntity>? subcategories,
+      List<ProductDataEntity>? products}) {
     return HomeState(
         screenStatus: screenStatus ?? this.screenStatus,
         brands: brands ?? this.brands,
         categories: categories ?? this.categories,
-        subcategories: subcategories ?? this.subcategories);
+        subcategories: subcategories ?? this.subcategories,
+        products: products ?? this.products);
   }
 }
 

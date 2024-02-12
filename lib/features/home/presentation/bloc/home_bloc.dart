@@ -5,10 +5,12 @@ import 'package:shopping_app/features/home/data/data_sources/remote/home_remote_
 import 'package:shopping_app/features/home/data/repositories/home_repo_impl.dart';
 import 'package:shopping_app/features/home/domain/repositories/home_repo.dart';
 import 'package:shopping_app/features/home/domain/use_cases/get_categories_use_case.dart';
+import 'package:shopping_app/features/home/domain/use_cases/get_products_use_case.dart';
 import 'package:shopping_app/features/home/domain/use_cases/get_subcategories_use_case.dart';
 
 import '../../../../core/api/api_manager.dart';
 import '../../domain/entities/Category_and_brand_entity.dart';
+import '../../domain/entities/ProductEntity.dart';
 import '../../domain/use_cases/get_brands_use_case.dart';
 
 part 'home_event.dart';
@@ -16,7 +18,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ApiManager apiManager;
-  int idx = 0;
+  int idx = 1;
   int catIdx = 0;
   bool selected = false;
   bool selectedProduct = false;
@@ -74,9 +76,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           print(e.toString());
           emit(state.copyWith(screenStatus: ScreenStatus.failure));
         }
-      } else if (event is SelectCategoryEvent) {
+      } else if (event is SelectSubcategoryEvent) {
+        emit(state.copyWith(screenStatus: ScreenStatus.selectSubcategory));
         selected = event.selected;
-        emit(state.copyWith(screenStatus: ScreenStatus.selectCategory));
+        emit(state.copyWith(screenStatus: ScreenStatus.loading));
+        HomeRemoteDataSource homeRemoteDataSource =
+            HomeRemoteDataSourceImpl(apiManager);
+        HomeRepo homeRepo = HomeRepoImpl(homeRemoteDataSource);
+        GetProductsUseCase getProductsUseCase =
+            GetProductsUseCase(homeRepo, event.cat, event.subcat);
+        try {
+          var res = await getProductsUseCase.call(event.cat, event.subcat);
+          //  print("helloooooooooooooooooooooooooooooooo");
+          // print(res.data?[0]??"Null");
+          emit(state.copyWith(
+              screenStatus: ScreenStatus.success, products: res.data));
+        } catch (e) {
+          print("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+          print(e.toString());
+          emit(state.copyWith(screenStatus: ScreenStatus.failure));
+        }
       } else if (event is SelectProductEvent) {
         selectedProduct = event.selectedProduct;
         emit(state.copyWith(screenStatus: ScreenStatus.selectProduct));

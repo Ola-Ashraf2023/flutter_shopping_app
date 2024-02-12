@@ -20,10 +20,12 @@ class ChangeCategoryEvent extends HomeEvent {
   ChangeCategoryEvent(this.catIndex, this.id);
 }
 
-class SelectCategoryEvent extends HomeEvent {
+class SelectSubcategoryEvent extends HomeEvent {
   bool selected;
+  String? cat;
+  String? subcat;
 
-  SelectCategoryEvent(this.selected);
+  SelectSubcategoryEvent(this.selected, this.cat, this.subcat);
 }
 
 class SelectProductEvent extends HomeEvent {

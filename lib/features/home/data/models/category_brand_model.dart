@@ -1,6 +1,5 @@
 import 'package:shopping_app/features/home/domain/entities/Category_and_brand_entity.dart';
 
-
 class CategoryBrandModel extends CategoryBrandEntity {
   CategoryBrandModel({
     this.results,

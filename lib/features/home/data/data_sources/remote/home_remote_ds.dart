@@ -1,3 +1,4 @@
+import '../../models/ProductModel.dart';
 import '../../models/category_brand_model.dart';
 
 abstract class HomeRemoteDataSource {
@@ -6,4 +7,6 @@ abstract class HomeRemoteDataSource {
   Future<CategoryBrandModel> sendBrandRequest();
 
   Future<CategoryBrandModel> sendSubcategoryRequest(String? id);
+
+  Future<ProductModel> sendProductRequest(String? cat, String? subcat);
 }

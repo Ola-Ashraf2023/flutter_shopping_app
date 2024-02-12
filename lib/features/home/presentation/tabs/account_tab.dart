@@ -159,37 +159,6 @@ class AccountTab extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              children: [
-                Text("Your Address",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff06004F),
-                        )),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            color: AppColors.textColor,
-                          ),
-                          onPressed: () {},
-                        ),
-                        hintText: "address",
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.r))),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:shopping_app/features/home/domain/entities/ProductEntity.dart';
 import 'package:shopping_app/features/home/domain/repositories/home_repo.dart';
 
 import '../../domain/entities/Category_and_brand_entity.dart';
@@ -19,4 +20,8 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<CategoryBrandEntity> getSubcategories(String? id) =>
       categoriesRemoteDataSource.sendSubcategoryRequest(id);
+
+  @override
+  Future<ProductEntity> getProducts(String? cat, String? subcat) =>
+      categoriesRemoteDataSource.sendProductRequest(cat, subcat);
 }
